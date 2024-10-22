@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="signup.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body class="">
+
+    <section>
+        <div class="nav text-center">     
+            <ul class="nav justify-content-center">
+              <li class="nav-item">
+                <a class="nav-link active text-dark" aria-current="page" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link text-dark" href="#">Personal</a>
+              </li>
+    
+              <li class="nav-item dropdown ">
+                  <a class="nav-link dropdown-toggle text-dark" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">Features</a>
+                  <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">Bills Payments</a></li>
+                    <li><a class="dropdown-item" href="#">Fund Transfer</a></li>
+                    <li><a class="dropdown-item" href="#">Cards</a></li>
+                    <!-- <li><hr class="dropdown-divider"></li> -->
+                    <li><a class="dropdown-item" href="#">Loans</a></li>
+                  </ul>
+                </li>
+    
+              <li class="nav-item">
+                <a class="nav-link text-dark" aria-disabled="true">About</a>
+              </li>
+            </ul>
+          
+    
+          <div class="navbutt d-flex justify-content-center">
+              <a class="text-decoration-none" href="login.html">
+                
+                <button class="signup d-flex bg-primary justify-content-between align-items-center shadow fw-bold rounded">
+                   <i class="fa-solid fa-user  w-50  "></i> 
+                   Login</button>
+              </a>
+              
+          </div>        
+        </div>
+      </section>
+            
+        
+    <div  class="i col-7 mx-auto bg-white my-5 rounded shadow "
+        div class="bg-success py-3">
+
+            <h3 class="text-center text-primary">Sign Up</h3>
+            <p class="text-center" >Kindly provide all necessary details</p>
+
+            <div class="p-3">
+                <div class="cards mb-3">
+                    <input type="checkbox" name="card" id="">
+                    <label for="master ">Master</label>
+                    <input type="checkbox" name="card" id="">
+                    <label for="verve">Verve</label>
+                    <input type="checkbox" name="card" id="">
+                    <label for="visa">Visa</label>
+                </div>
+
+                <label class="form-label fw-bold" for="firstName">First Name</label>
+                <input type="text" id="firstName"class="form-control mb-3" placeholder="First Name">
+
+                <label class="form-label fw-bold" for="middleName">Middle Name</label>
+                <input type="text" id="middleName"class="form-control mb-3" placeholder="Middle Name">
+
+                <label class="form-label fw-bold" for="lastName">Last Name</label>
+                <input type="text" id="lastName"class="form-control mb-3" placeholder="Last Name">
+
+                <label class="form-label fw-bold" for="address">Address</label>
+                <input type="text" id="myAddress"class="form-control mb-3" placeholder="Address">
+
+                <label class="form-label fw-bold" for="email"> Email Address</label>
+                <input type="email" id="email"class="form-control mb-3" placeholder="Email Address">
+
+                <label class="form-label fw-bold" for="phoneNumber"> Phone Number</label>
+                <input type="number" id="phoneNumber" class="form-control mb-3" placeholder="Phone Number">
+
+                <label class="form-label fw-bold" for="myOccupation"> Occupation</label>
+                <input type="text" id="myOccupation" class="form-control mb-3" placeholder="Occupation">
+
+                <label class="form-label fw-bold" for="dateOfBirth">Date of Birth</label>
+                <input type="date" id="dateOfBirth" class="form-control mb-3" placeholder="DOB">
+                
+                <label class="form-label fw-bold" for="profilePic"></label>
+                <input type="file" id="profilePic" class=" form-control mb-3"  placeholder="profilePic">
+               
+                <label class="form-label fw-bold" for="myNin">NIN</label>
+                <input type="number" id="myNin" class=" form-control mb-3"  placeholder="NIN">
+               
+                <label class="form-label fw-bold" for="myBvn">BVN</label>
+                <input type="number" id="myBvn"class=" form-control mb-3" placeholder="BVN">
+          
+                <label class="form-label fw-bold" for="password">Password</label>
+                <input type="password" id="password" class="form-control mb-3" placeholder="Password" required>
+
+                <label class="form-label fw-bold" for="">How Did You Hear About Us? (Optional)</label>
+                <select class="form-select form-select-lg mb-3" aria-label="Large select example">
+                    <option selected>Click To Select</option>
+                    <option value="1">Facebook</option>
+                    <option value="2">Friends</option>
+                    <option value="3">Others</option>
+                  </select>
+
+                <button id="signUp" class="text-center text-light bg-primary border border-0 rounded form-control">CREATE ACCOUNT</button>
+                
+            </div>
+            </div>
+    </div>
+    <script  type="module">
+ 
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.0/firebase-app.js";
+      import {getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.14.0/firebase-auth.js";
+      import {  getDatabase,ref, set} from "https://www.gstatic.com/firebasejs/10.14.0/firebase-database.js";
+
+       import { getStorage, ref as storageRef, uploadBytes, getDownloadURL} from "https://www.gstatic.com/firebasejs/10.14.0/firebase-storage.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+    
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyAEIG2GGIAlkUz0aFYb7CoeUS3Y8Js6RW0",
+        authDomain: "my-first-fb-project-706ea.firebaseapp.com",
+        projectId: "my-first-fb-project-706ea",
+        storageBucket: "my-first-fb-project-706ea.appspot.com",
+        messagingSenderId: "289169955678",
+        appId: "1:289169955678:web:09032ad8105c1a17144dcf",
+        measurementId: "G-GET6P7NPGP"
+      };
+    
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth= getAuth(app);
+      const database = getDatabase();
+      const storage = getStorage();
+    
+    
+      document.getElementById("signUp").addEventListener('click', () =>{
+        let firstName = document.getElementById("firstName").value;
+        let middleName = document.getElementById("middleName").value;
+        let lastName = document.getElementById("lastName").value;
+        let dateOfBirth = document.getElementById("dateOfBirth").value;
+        let myBvn = document.getElementById("myBvn").value;
+        let myNin = document.getElementById("myNin").value;
+        let email = document.getElementById("email").value;
+        let myAddress = document.getElementById("myAddress").value;
+        let profilePic = document.getElementById("profilePic").files[0];
+        let userAccountNum = Math.floor(100000000 + Math.random() * 9000000000);
+        let password = document.getElementById("password").value;
+        let phoneNumber = document.getElementById("phoneNumber").value;
+        let time = new Date();
+        let accountBalance = 0;
+      
+      
+      
+      // Register the User
+        createUserWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+       // Signed up 
+       const user = userCredential.user;
+       const userId = user.uid;
+       
+      alert("welcome to firebase");
+
+          // upload  profile pic to firebase storage
+        const myPicRef = storageRef(storage, `profilePictures/${userId}`);
+         uploadBytes(myPicRef, profilePic)
+         .then((snapshot) => {
+           console.log('upload pic');
+           console.log(snapshot)
+
+          getDownloadURL(snapshot.ref).then((downloadURL) => {
+            console.log("Profile picture URL: ", downloadURL);
+
+            let myDetails = {
+                  firstName,
+                  middleName,
+                  lastName,
+                  dateOfBirth,
+                  myBvn,
+                  myNin,
+                  myAddress,
+                  Date:time.toLocaleDateString(),
+                  accNumber: userAccountNum,
+                  userAccountBalance: accountBalance,
+                  profilePicURL: downloadURL,
+                  email,
+                  phoneNumber,
+              };
+
+              console.log( myDetails)
+      
+          const userRef = ref(database, `users/${userId}`)
+           set(userRef, myDetails)
+            .then(() => {
+               console.log("User registered successfully")
+                // Data saved successfully!
+            })
+            .catch((error) => {
+              console.log("Error saving user database")
+              console.log(error)
+               // The write failed...
+            }); 
+            });
+      
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      alert(errorMessage)
+      // ..
+    })
+  });
+
+    
+
+    
+
+   
+});
+      
+      
+</script>  
+</body>
+</html>

@@ -1,0 +1,26 @@
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* outline: 1px black solid; */
+    padding: 1px;
+    width: 90%;
+    margin: auto;
+}
+nav{
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbutt{
+    display: flex;
+    gap: 20px;
+}
+.signup{
+    border: none;
+    font-size: 14px;
+    width: 75px;
+    color: white;
+    background-color: black;
+}

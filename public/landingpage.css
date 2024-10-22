@@ -1,0 +1,246 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    padding: 0;
+    margin: 0;
+    background-color: #F2F7F8;
+    font-family: "Plus Jakarta Sans", sans-serif; ;
+    
+}
+section{
+    background-color: rgb(223, 220, 220);
+}
+.nav-bar{
+    display: flex;
+    position: relative;
+}
+.nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1px;
+    width: 80%;
+    margin: auto;
+    position: sticky;
+}
+nav{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbutt{
+    display: flex;
+    gap: 20px;
+}
+.signup{
+    border: none;
+    font-size: 14px;
+    width: 75px;
+    color: white;
+    background-color: black;
+}
+
+/* <!-- PiggyVestBody --> */
+.piggydescription{
+    z-index: -1;
+    display: flex;
+    margin: 0px 70px;
+    justify-content: space-between;
+    margin: 140px 80px;
+}
+
+.savetext{
+    margin-top: 60px;
+    width: 47%;
+}
+.save-better{
+    font-size: 48px;
+    color: rgb(18, 34, 49);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: 700;
+}
+.customerstext{
+    font-weight: 400;
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-size: 20px;
+    color: rgb(61, 79, 96);}
+.downloadapp{
+    margin-top: 50px;
+}
+.getapp{
+    background-color: black;
+}
+.getapp-a{
+    text-decoration: none;
+    color: white;
+}
+.iphone{
+    filter: invert(100%);
+    margin-right: 5px;
+} 
+.playstore{
+    margin-right: 5px;
+}
+.savepattern{
+    width: 45%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.safelock{
+    position: absolute;
+    margin-bottom: 200px;
+    margin-right: 520px;
+}
+.target{
+    position: absolute;
+    margin-bottom: 240px;
+    margin-left: 500px;
+}
+.flexnaira{
+    position: absolute;
+    height: 65px;
+    margin-top: 240px;
+    margin-right: 530px;
+}
+.piggybank{
+    position: absolute;
+    margin-top: 500px;
+    margin-left: 50px;
+}
+.investify{
+    position: absolute;
+    margin-top: 240px;
+    margin-left: 500px;
+}
+/* Keyframes for bounce effect */
+@keyframes bounce {
+    0%, 100% {
+      transform: translateY(0); 
+    }
+    50% {
+      transform: translateY(-20px);/
+    }
+  }
+  .savepattern {
+      animation: bounce 5s infinite; 
+  }
+  .savepattern {
+      animation-duration: 5s; 
+      animation-timing-function: ease-in-out; 
+      animation-delay: 0s; 
+  }
+
+/* display-image */
+
+.account{
+   width: 70%;
+   height: 30vh;
+   margin: auto;
+  object-position: center;
+  position: relative;
+ 
+
+}
+.parent{
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    display: flex;
+}
+.acc-img{
+    width: 100%;
+    height: 93vh;
+    position: relative;
+}
+h3{
+    position: absolute;
+    margin-bottom: 20vh;
+}
+
+  
+.section-4{
+    height: 55vh;
+    margin-top: 80vh;
+    align-items: center;
+ }
+ .about{
+    display: flex;
+    width: 70%;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    justify-content: space-between;
+ }
+ 
+ .us{
+    border: 4px solid rgb(90, 156, 255);
+    height: 20vh;
+    aspect-ratio: 1;
+    margin-bottom: 17px;
+    display: flex;
+    justify-content: space-around;
+    /* width: 20px; */
+ }
+ .us:hover{
+    transform: scale(1.05);
+    transition: all 0.3s;
+    cursor: pointer;
+    background: whitesmoke;
+    border: none;
+    box-shadow: 2px 2px 5px 3px grey;
+ }
+ .about a{
+    color: black;
+    font-weight: 700;
+    display: block;
+    text-align: center;
+ }
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .carousel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh;
+}
+#carouselExampleAutoplaying {
+    width: 400px;  
+    height: 400px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+   */
+  /* .carousel-inner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  } */
+  
+

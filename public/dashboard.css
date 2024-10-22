@@ -1,0 +1,89 @@
+body{
+    margin: 0;
+    background-color: rgb(247, 247, 247);
+}
+.my-dashboard{
+    display: flex;
+}
+.dashboard-overflow{
+    display: block ;
+    width: 15%;
+    justify-content: center;
+}
+.user{
+    align-items: center;
+    width: 18vw;
+    margin-bottom: 50px;
+}
+.overflow-butt{
+    display: block;
+    justify-content: space-around;
+    gap: 80px;
+    margin: auto;
+    margin-bottom: 60px;   
+    color: rgb(0, 140, 255);
+}
+.overflow-butt:hover{
+    background-color: white;
+}
+.dashboard{
+    width: 80%;
+    margin: 0 80px;
+}
+.dashboard-nav{
+    display: flex;
+    padding: 10px;
+    margin-bottom: 30px;
+    position: sticky;
+}
+.balance{
+    padding: 40px;
+    background: rgb(0, 140, 255);
+    color: white;
+}
+.task{
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 40px;
+}
+.a-link {
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+.function{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    margin-top: 60px;
+    width: 100% ;
+    color: white;
+}
+.function-a{
+    width: 160px;
+    height: 160px;
+    padding: 20px;
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+    /* border: 1px solid #000;  */
+    background-color: rgb(0, 140, 255); 
+}
+.function-a:hover{
+    background-color: rgb(255, 187, 0);
+}
+#userImage{
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}

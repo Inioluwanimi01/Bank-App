@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-5.3.3-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="dashboard.css">
+
+    <style>
+        /* Add some basic styling for the table */
+        #transactionTable {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        #transactionTable th, #transactionTable td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        #transactionTable th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+   <section class="my-dashboard">
+    <div class="overflow-y-scroll dashboard-overflow">
+        <div class="my-5" id="userImage">
+            <!-- <img class="user-img mt-5 mb-5  text-center" width="150" src="./New Images/png-transparent-user-profile-computer-icons-login-user-avatars-thumbnail-removebg-preview.png" alt=""> -->
+            <!-- <i  class="fa-solid  fa-user"></i> -->
+        </div>
+        
+        
+            <a class="text-decoration-none" href="index.html">
+                <button class="overflow-butt border-0 rounded p-2 "><i class="fa-solid fa-house"></i> Home</button>
+            </a>
+            <button class="overflow-butt border-0 rounded p-2 "><i class="fa-solid fa-user-plus"></i> Beneficiaries</button>
+            <button class="overflow-butt border-0 rounded p-2 "><i class="fa-solid fa-right-left"></i> Transactions</button>
+            <button class="overflow-butt border-0 rounded p-2 "><i class="fa-solid fa-gear"></i> Profile settings</button>
+            <button class="overflow-butt border-0 rounded p-2 "><i class="fa-solid fa-right-from-bracket"></i>Logout</button>
+        
+    </div>
+    
+    <div class="dashboard">
+
+        <div id="dashboardNav" class="dashboard-nav">
+            <h5>Hello, Rhoda Fadare <i class="fa-light fa-hands-clapping"></i></h5>
+            <i class="fa-solid fa-bell"></i>
+        </div> 
+                     
+        <div class="balance rounded">
+            <div id="dispBalance" class="disp-balance">
+                
+            </div>
+              <!-- more details -->
+              <div class="task">
+                <div class="child">
+                   
+                
+                </div>
+
+               
+            </div>
+            
+        </div>
+             
+    
+            <div class="function">
+                <button id="myDepositBtn"  class="border-0 rounded text-light function-a ">
+                    <i class="fa-solid func  fa-money-bills" style="color: white;" ></i>
+                    Deposit
+                </button>
+               
+                <button id="myWithdrawBtn" class="border-0 text-light rounded function-a ">
+                    <i class="fa-solid func  fa-arrow-right-arrow-left" style="color: white;" ></i>
+                    Withdraw
+                </button>
+               
+                <button id="showBillPayment" class="border-0 text-light func rounded function-a ">
+                    <i class="fa-solid fa-money-bill-transfer" style="color: white;"></i>
+                   Bill Payment
+                   </button>
+            </div>
+
+            <div id="transferForm" ></div>
+            
+            <table id="transactionTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>New Balance</th>
+                    </tr>
+                </thead>
+                <tbody id="transactionBody">
+                    
+                </tbody>
+            </table>
+            
+           
+
+      <!-- <div class="parent">
+        <div class="account">Transfer</div>
+        <div class="account">Transaction History</div>
+        <div class="account">Airtime Top-ups</div>
+        <div class="account">Bill payment</div>
+        <div class="account">Request Debit card</div>
+      </div> -->
+            
+    </div>
+
+
+
+
+   </section>
+
+   <script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getAuth,onAuthStateChanged,  } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+    import { getDatabase, 
+        ref, 
+        onValue,  //  for retrieving message
+        update, 
+        runTransaction
+     } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-database.js";
+
+
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+   
+    const firebaseConfig = {
+      apiKey: "AIzaSyAEIG2GGIAlkUz0aFYb7CoeUS3Y8Js6RW0",
+      authDomain: "my-first-fb-project-706ea.firebaseapp.com",
+      projectId: "my-first-fb-project-706ea",
+      storageBucket: "my-first-fb-project-706ea.appspot.com",
+      messagingSenderId: "289169955678",
+      appId: "1:289169955678:web:09032ad8105c1a17144dcf",
+      measurementId: "G-GET6P7NPGP"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const database = getDatabase();
+
+    
+    const dispBalance = document.getElementById("dispBalance");
+    let uid = null;
+
+    onAuthStateChanged(auth, (user) => {
+  if (user) {
+    const userId = user.uid;
+    
+    console.log(userId);
+    console.log(user.email);
+
+    
+const userRef = ref(database, `users/${userId}`);
+onValue(userRef, (snapshot) => {
+    if (snapshot.exists()) {
+    const data = snapshot.val();  
+    console.log(data);
+
+
+
+    dashboardNav.innerHTML = `
+                <h4> Welcome, ${data.firstName} ${data.lastName} </h4>
+                `;
+    dispBalance.innerHTML = `
+                <h5>Balance : $ ${data.userAccountBalance}</h5>
+                <p>Email: ${user.email}</p>
+                <p>BVN: ${data.myBvn}</p>
+                <p>Account: ${data.accNumber}</p>
+                `;
+    userImage.innerHTML = `
+                <img src="${data.profilePicURL}" alt="Profile Picture" class="img-fluid  rounded-circle" style="max-width: 450px;  max-height: 150px;" />    
+                `;
+     
+  } else {
+    alert("No data available");
+    console.log("No data available");
+  }
+
+});
+
+
+const transactions = [];
+function transactionForm(formType) {
+    const transferForm = document.getElementById('transferForm');
+    let buttonLabel = formType === 'deposit' ? 'Deposit' : 'Withdraw';
+
+    transferForm.innerHTML = `
+        <div id="FORM" class="withdraw-dasboard col-10 mx-auto bg-white my-5 rounded shadow">
+            <div class="bg-white py-3">
+                <div class="p-5">
+                    <label class="form-label fw-bold" for="amountInput">Amount</label>
+                    <input type="number" id="amountInput" class="form-control mb-3" placeholder="Input Amount">
+                    <label class="form-label fw-bold" for="pinInput">PIN</label>
+                    <input type="password" id="pinInput" class="form-control mb-4" placeholder="Enter PIN" required>
+                    <button id="formBtn" class="mt-2 mb-3 text-center text-light bg-primary border border-0 rounded form-control">
+                        ${buttonLabel}
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+
+    const formBtn = document.getElementById('formBtn');
+    formBtn.addEventListener('click', function (event) {
+        event.preventDefault();
+        const amountInput = document.getElementById('amountInput');
+        const amount = Number(amountInput.value);
+        
+        if (formType === 'deposit') {
+            handleDeposit(amount); // Call the deposit function
+        } else {
+            handleWithdraw(amount); // Call the withdraw function if applicable
+        }
+    });
+}
+
+function handleDeposit(amount) {
+    if (amount > 0) {
+        runTransaction(userRef, (user) => {
+            if (user) {
+                const currentBalance = Number(user.userAccountBalance) || 0;
+                user.userAccountBalance = currentBalance + amount;
+
+                // for transaction history
+                transactions.push({
+                            date: new Date().toLocaleString(),
+                            type: 'Deposit',
+                            amount: amount,
+                            newBalance: user.userAccountBalance
+                        });
+            }
+            return user;
+        }).then(() => {
+            updateUI(); // Call function to update balance display
+            updateTransactionHistory();
+            alert("Deposit Successful!");
+        }).catch((error) => {
+            console.error("Error updating balance:", error);
+            alert("An error occurred during deposit.");
+        });
+    } else {
+        console.log("Please enter a valid deposit amount.");
+    }
+}
+
+
+function handleWithdraw(amount) {
+    if (amount > 0) {
+        runTransaction(userRef, (user) => {
+            if (user) {
+                const currentBalance = Number(user.userAccountBalance) || 0;
+                // Check for sufficient funds
+                if (amount <= currentBalance) {
+                    user.userAccountBalance = currentBalance - amount;
+                    
+                    // for history update
+                    transactions.push({
+                                date: new Date().toLocaleString(),
+                                type: 'Withdrawal',
+                                amount: amount,
+                                newBalance: user.userAccountBalance
+                            });
+                } else {
+                    alert("Insufficient funds for this withdrawal.");
+                    console.log("Insufficient funds for this withdrawal.");
+                    return; // Abort the transaction
+                }
+            }
+            return user;
+        }).then(() => {
+            updateUI(); // Update the UI to reflect new balance
+            updateTransactionHistory();
+            alert("Withdrawal Successful!");
+        }).catch((error) => {
+            console.error("Error updating balance:", error);
+            alert("An error occurred during withdrawal.");
+        });
+    } else {
+        console.log("Please enter a valid withdrawal amount.");
+        alert("Please enter a valid withdrawal amount.");
+    }
+}
+
+function updateUI() {
+    onValue(userRef, (snapshot) => {
+        if (snapshot.exists()) {
+            const data = snapshot.val();
+            dispBalance.innerHTML = `
+                <h4>Balance: ${data.userAccountBalance}</h4>
+                <p>Email: ${data.email}</p>
+                <p>BVN: ${data.myBvn}</p>
+                <p>Account: ${data.accNumber}</p>
+            `;
+        } else {
+            console.log("No data available for user.");
+        }
+    }, (error) => {
+        console.error("Error fetching user data:", error);
+    });
+}
+
+function updateTransactionHistory() {
+            const transactionBody = document.getElementById('transactionBody');
+            transactionBody.innerHTML = ''; // Clear existing entries
+            transactions.forEach(transaction => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${transaction.date}</td>
+                    <td>${transaction.type}</td>
+                    <td>${transaction.amount}</td>
+                    <td>${transaction.newBalance}</td>
+                `;
+                transactionBody.appendChild(row);
+            });
+        }
+
+// Event listeners for buttons
+document.getElementById('myDepositBtn').addEventListener('click', function() {
+    transactionForm('deposit'); // Show Deposit Form
+});
+
+document.getElementById('myWithdrawBtn').addEventListener('click', function() {
+    transactionForm('withdraw'); // Show Withdraw Form
+});
+
+
+
+
+
+
+ } else {
+    console.log("User is signed out")
+    // ...
+  }
+});
+
+
+  </script>
+</body>
+</html>
